@@ -6,12 +6,11 @@
 package models;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hazco
  */
 @Entity
-@Table(name = "role")
+@Table(catalog = "userdb", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
@@ -36,13 +35,13 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "role_id")
+    @Column(name = "role_id", nullable = false)
     private Integer roleId;
     @Basic(optional = false)
-    @Column(name = "role_name")
+    @Column(name = "role_name", nullable = false, length = 25)
     private String roleName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
-    private List<User> userList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    private Collection<User> userCollection;
 
     public Role() {
     }
@@ -73,12 +72,12 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public List<User> getUserList() {
-        return userList;
+    public Collection<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

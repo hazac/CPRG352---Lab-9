@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.User;
 import services.UserService;
 
@@ -29,12 +28,12 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService service = new UserService();
         request.setAttribute("activeMessage", "Active");
-        ArrayList<User> userList = null;
-        try {
+        List<User> userList = null;
+        try{            
             userList = service.getAll();
             request.setAttribute("list", userList);
             for(User s : userList){
-                System.out.println(s.getRole().getRole_name());
+                System.out.println(s.getRole().getRoleName());
             }
 
         } catch (Exception e) {

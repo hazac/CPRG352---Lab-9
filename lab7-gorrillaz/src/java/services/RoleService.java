@@ -15,15 +15,15 @@ import models.Role;
  */
 public class RoleService {
     
-    /*public Role getRole(int id) throws Exception{
+    public Role getRole(int id) throws Exception{
         ArrayList<Role> roles = getAll();
         for(Role r : roles){
-            if(r.getRole_id() == id){
+            if(r.getRoleId() == id){
                 return r;
             }                
         }
         return null;
-    }*/
+    }
     
     public ArrayList<Role> getAll() throws Exception{
         RoleDB roledb = new RoleDB();

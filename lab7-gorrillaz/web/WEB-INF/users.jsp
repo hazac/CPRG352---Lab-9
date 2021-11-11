@@ -57,33 +57,31 @@
                         <th>Active</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Role</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr> 
                     <c:forEach items="${list}" var="item">
                         <tr>
                             <td>${item.email}</td>
-                            <td><c:if test = "${item.active}">
+                            <td><c:if test = "${item.getActive()}">
                                     ${activeMessage}
                                 </c:if></td>
                             <td>${item.firstName}</td>
                             <td>${item.lastName}</td>
-                            <td>${item.role.role_name}</td>
-                        <form method="POST" action="user" float="left">
-                            <td>
-                                <input type="hidden" name="email" value="${item.email}">
-                                <input type="hidden" name="action" value="fillEdit">                                     
-                                <input type="submit" value="Edit">
-                            </td>
-                        </form>
-                        <form method="POST" action="user" float="left">
-                            <td>
-                                <input type="hidden" name="email" value="${item.email}">
-                                <input type="hidden" name="action" value="delete">                                     
-                                <input type="submit" value="Delete">
-                            </td>
-                        </form>
+                            <form method="POST" action="user" float="left">
+                                <td>
+                                    <input type="hidden" name="email" value="${item.email}">
+                                    <input type="hidden" name="action" value="fillEdit">                                     
+                                    <input type="submit" value="Edit">
+                                </td>
+                            </form>
+                            <form method="POST" action="user" float="left">
+                                <td>
+                                    <input type="hidden" name="email" value="${item.email}">
+                                    <input type="hidden" name="action" value="delete">                                     
+                                    <input type="submit" value="Delete">
+                                </td>
+                            </form>
                         </tr>
                     </c:forEach> </table>
 
