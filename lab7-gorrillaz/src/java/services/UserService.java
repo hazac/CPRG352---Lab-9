@@ -22,7 +22,7 @@ public class UserService {
         return user;
     }
     
-    public List<User> getAll() throws Exception{        
+    public List<User> getAll() throws Exception{
         UserDB userdb = new UserDB();
         List<User> users = userdb.getAll();
         return users;
@@ -33,13 +33,14 @@ public class UserService {
         List<Role> roles = rs.getAll();
         
         Role role = null;
-        for(Role r : roles){
+        for (Role r : roles) {
             if(r.getRoleId() == roleId){
                 role = r;
             }                
         }
         
         User newUser = new User (email, isActive, firstName, lastName, password);
+        newUser.setRole(role);
         UserDB userdb = new UserDB();
         userdb.insert(newUser);        
     }
@@ -56,13 +57,15 @@ public class UserService {
         }
         
         User newUser = new User (email, isActive, firstName, lastName, password);
+        newUser.setRole(role);
         UserDB userdb = new UserDB();
         userdb.update(newUser);        
     }
     
     public void delete(String email) throws Exception{
-        User user = get(email);
         UserDB userdb = new UserDB();
+        User user = userdb.get(email);
+        System.out.println("User" + user.getEmail());
         userdb.delete(user);
     }
 }

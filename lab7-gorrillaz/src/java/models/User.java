@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hazco
  */
 @Entity
-@Table(catalog = "userdb", schema = "")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
@@ -36,22 +37,22 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(nullable = false, length = 40)
+    @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "active")
     private boolean active;
     @Basic(optional = false)
-    @Column(name = "first_name", nullable = false, length = 20)
+    @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @Column(name = "last_name", nullable = false, length = 20)
+    @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @Column(nullable = false, length = 20)
+    @Column(name = "password")
     private String password;
-    @JoinColumn(name = "role", referencedColumnName = "role_id", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "role", referencedColumnName = "role_id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Role role;
 
     public User() {

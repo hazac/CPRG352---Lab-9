@@ -5,12 +5,9 @@
  */
 package dataaccess;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import models.Role;
-import models.User;
 
 /**
  *
@@ -20,7 +17,7 @@ public class RoleDB {
     public List<Role> getAll() throws Exception {
        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try{
-           ArrayList<Role> roles = (ArrayList<Role>) em.createNamedQuery("Role.findAll", Role.class).getResultList();
+           List<Role> roles = em.createNamedQuery("Role.findAll", Role.class).getResultList();
            return roles;
         }            
         finally{

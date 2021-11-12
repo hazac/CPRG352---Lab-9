@@ -7,14 +7,12 @@ package servlets;
 //hellllllo
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.User;
 import services.UserService;
 
@@ -29,12 +27,9 @@ public class UserServlet extends HttpServlet {
         UserService service = new UserService();
         request.setAttribute("activeMessage", "Active");
         List<User> userList = null;
-        try{            
+        try {
             userList = service.getAll();
             request.setAttribute("list", userList);
-            for(User s : userList){
-                System.out.println(s.getRole().getRoleName());
-            }
 
         } catch (Exception e) {
         }
@@ -61,7 +56,7 @@ public class UserServlet extends HttpServlet {
             String userPassword = request.getParameter("password");
             int userRole = Integer.parseInt(request.getParameter("role"));
             
-
+            System.out.println(userEmail + userActive + userFirstname + userLastname + userPassword + userRole);
             try {
                 service.insert(userEmail, userActive, userFirstname, userLastname, userPassword, userRole);                
                 request.setAttribute("message", "User successfully added to database");
